@@ -1,0 +1,14 @@
+.auth-logo {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    font-family:var(--text-body);
+    color:var(--primary);
+    flex:1;
+    max-height: 250px;
+}
+.auth-logo > img{
+    width:60px;
+    
+}
