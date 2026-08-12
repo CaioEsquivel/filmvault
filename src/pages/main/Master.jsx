@@ -1,34 +1,18 @@
 import './Master.css'
 import logo from '../../assets/logo.png'
-import runner from '../../assets/runnerbanner.png'
-import tron from '../../assets/tronbanner.png'
-import matrix from '../../assets/matrixbanner.png'
+
 import { NavLink } from 'react-router-dom'
-import { Navigation, Pagination, Scrollbar, EffectFade, Parallax } from 'swiper/modules'
+import { useEffect } from 'react'
+
+import { SwiperSlider } from '../../components/SwiperSlider/SwiperSlider'
+import { ArchiveCase } from '../../components/ArchiveCase/ArchiveCase'
 
 
-import 'swiper/css/effect-fade'
-import 'swiper/css/parallax'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
-
-import {Swiper, SwiperSlide} from 'swiper/react'
-
-// const swiper = new Swiper('.swiper', {
-//   loop: true,
-//   parallax: true,
-//   effect: "fade",
-//   navigation: {
-//     nextEl: ".swiper-button-next",
-//     prevEl: ".swiper-button-prev"
-//   },
-//   scrollbar: {
-//     el: ".swiper-scrollbar"
-//   }
-// });
 export const Master = ()=>{
+
+    
+
+
     return(
         <>
         <main>
@@ -102,76 +86,57 @@ export const Master = ()=>{
                 <section>
                     <div className="section-swiper">
 
-                    <Swiper
-                    modules={[ Pagination, Scrollbar, EffectFade, Parallax]}
-                    slidesPerView={1}
-                    loop={true}
-                    parallax={true}
-                    effect='fade'
-                    scrollbar={{
-                        el: ".swiper-scrollbar"
-                    }}
-                    >
-                        <SwiperSlide>
-                            <div className="swiper-slide-content">
+                    <SwiperSlider/>
 
-                                <img src={matrix} alt="" />
-                                <div className="swiper-bg-gradient"></div>
-
-                                <h3><i className="ri-arrow-right-s-line"></i>
-                            FEATURE FILE</h3>
-
-
-                                <h2>THE MATRIX</h2>
-
-                                <div className="swiper-details">
-                                    <p>1999</p>
-                                    <div className="swiper-details-dot"></div>
-                                    <p>2h 16m</p>
-                                    <div className="swiper-details-dot"></div>
-                                    <p>R</p>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, ipsa quibusdam. Tempora nihil sunt, illo totam officiis hic quae fugiat optio consectetur explicabo veritatis dignissimos error voluptas enim esse cum?</p>
-                                <div className="swiper-btn">
-                                    <button className='swiper-access-btn'><i className="ri-play-fill"></i> ACCESS FILE</button>
-                                    <button className='swiper-list-btn'><i className="ri-add-line"></i> WATCH LIST</button>
-                                </div>
-                            </div>
-                        </SwiperSlide> 
-                        <SwiperSlide>
-                            <div className="swiper-slide-content">
-
-                                <img src={tron} alt="" />
-                                <div className="swiper-bg-gradient"></div>
-
-                                <h3><i className="ri-arrow-right-s-line"></i>
-                            FEATURE FILE</h3>
-
-
-                                <h2>Blade Runner 2049</h2>
-
-                                <div className="swiper-details">
-                                    <p>2017</p>
-                                    <div className="swiper-details-dot"></div>
-                                    <p>2h 43m</p>
-                                    <div className="swiper-details-dot"></div>
-                                    <p>14</p>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, ipsa quibusdam. Tempora nihil sunt, illo totam officiis hic quae fugiat optio consectetur explicabo veritatis dignissimos error voluptas enim esse cum?</p>
-                                <div className="swiper-btn">
-                                    <button className='swiper-access-btn'><i className="ri-play-fill"></i> ACCESS FILE</button>
-                                    <button className='swiper-list-btn'><i className="ri-add-line"></i> WATCH LIST</button>
-                                </div>
-                            </div>
-                        </SwiperSlide> 
-                        <div className="swiper-scrollbar"></div>
-                        
-                    </Swiper>
 
                     </div>
+
+                    <div className="section-archive">
+                        <div className="archive-top">
+                            <p><i className="ri-arrow-right-s-line"></i> VAULT ARCHIVE</p>
+                            <a href="#">VIEW ALL FILES <i className="ri-arrow-right-long-line"></i></a>
+                        </div>
+                        <div className="archive-case-container">
+
+                            <ArchiveCase />
+
+                        </div>
+                    </div>
                 </section>
+
+                
             </div>
+
+            
         </main>
+
+        <footer class="site-footer">
+            <div class="footer-top">
+                <div class="footer-brand">
+                <h4>VAULT<span>_</span>ARCHIVE</h4>
+                <p>Sistema de armazenamento seguro. Todos os dados criptografados.</p>
+                </div>
+
+                <div class="footer-col">
+                <h5>NAVEGAÇÃO</h5>
+                <a href="#">Início</a>
+                <a href="#">Catálogo</a>
+                <a href="#">Sobre</a>
+                </div>
+
+                <div class="footer-col">
+                <h5>SISTEMA</h5>
+                <a href="#">Status: <span class="status-dot"></span> Online</a>
+                <a href="#">256-bit Encryption</a>
+                <a href="#">API Docs</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 VAULT ARCHIVE — TODOS OS DIREITOS RESERVADOS</p>
+                <p class="footer-code">// build_0x7F3A</p>
+            </div>
+            </footer>
         </>
     )
 }

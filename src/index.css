@@ -9,8 +9,14 @@
     --primary-hover:#39FF14;
     --primary-dark:#027a34;
     --primary-dead:#3faa63;
+    
+    
+    --blue:#008cff;
+    --blue-transparent:#008cff33;
+    --blue-dead:#6287d8;
  
     --border:#1A5E2A;
+    --border-blue:#1a325e;
 
     --text:#E8E8E8;
     --text-secondary:#9A9A9A;
