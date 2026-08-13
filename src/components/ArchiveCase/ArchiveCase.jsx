@@ -1,4 +1,3 @@
-import { data } from 'react-router-dom'
 import './ArchiveCase.css'
 import { useEffect, useState } from 'react'
 
@@ -20,7 +19,7 @@ export const ArchiveCase = ()=>{
         const response = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}`)
         const data = await response.json()
         
-        setData(data.results.slice(0, 5))    
+        setData(data.results.slice(0, 6))    
         
     }
     
@@ -57,7 +56,7 @@ export const ArchiveCase = ()=>{
                                         return genreId === genreArr.id
                                     })
 
-                                    return <p key={genre.id}>{genre.name}</p>
+                                    return <p key={genre?.id}>{genre?.name}</p>
                                 })}
                                 </div>
 

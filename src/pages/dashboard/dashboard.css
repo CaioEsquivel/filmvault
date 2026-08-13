@@ -1,0 +1,32 @@
+.section-archive{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+.archive-top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.archive-top > p{
+    color: var(--primary);
+    font-family: var(--text-body);
+    
+}
+.archive-top > a{
+    text-decoration: none;
+    color: var(--primary-dead);
+    font-family: var(--text-body);
+    
+}
+.archive-case-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}

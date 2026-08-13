@@ -6,6 +6,8 @@ import App from './App.jsx'
 import { Register } from './pages/register/Register.jsx'
 import { Login } from './pages/login/login.jsx'
 import { Master } from './pages/main/Master.jsx'
+import { Dashboard } from './pages/dashboard/dashboard.jsx'
+import { Archive } from './pages/archive/archive.jsx'
 
 
 
@@ -23,8 +25,12 @@ const route = createBrowserRouter([
     element: <Master />,
     children: [
       {
-        path: 'most-popular',
-        element: <App />
+        index:true,
+        element: <Dashboard />
+      },
+      {
+        path:'archive',
+        element: <Archive />
       }
     ]
   }

@@ -3,9 +3,10 @@ import logo from '../../assets/logo.png'
 
 import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Outlet } from 'react-router-dom'
 
-import { SwiperSlider } from '../../components/SwiperSlider/SwiperSlider'
-import { ArchiveCase } from '../../components/ArchiveCase/ArchiveCase'
+import { Dashboard } from '../dashboard/dashboard'
+import { Footer } from '../../components/Footer/Footer'
 
 
 export const Master = ()=>{
@@ -40,7 +41,7 @@ export const Master = ()=>{
 
                 <nav className='aside-links'>
                     <NavLink to='/' className={({isActive})=> isActive?'aside-link-active':''} ><i className="ri-home-4-fill"></i> dashboard</NavLink>
-                    <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-inbox-archive-line"></i> Vault Archive</NavLink>
+                    <NavLink to='archive' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-inbox-archive-line"></i> Vault Archive</NavLink>
                     <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-list-check"></i> categories</NavLink>
                     <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-bookmark-fill"></i> Watchlists</NavLink>
                     <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-star-fill"></i> Favorites</NavLink>
@@ -84,59 +85,21 @@ export const Master = ()=>{
                     <button className="header-profile"><i className="ri-user-fill"></i></button>
                 </header>
                 <section>
-                    <div className="section-swiper">
-
-                    <SwiperSlider/>
 
 
-                    </div>
+                    <Outlet/>
 
-                    <div className="section-archive">
-                        <div className="archive-top">
-                            <p><i className="ri-arrow-right-s-line"></i> VAULT ARCHIVE</p>
-                            <a href="#">VIEW ALL FILES <i className="ri-arrow-right-long-line"></i></a>
-                        </div>
-                        <div className="archive-case-container">
 
-                            <ArchiveCase />
-
-                        </div>
-                    </div>
                 </section>
-
+                
                 
             </div>
 
             
         </main>
 
-        <footer class="site-footer">
-            <div class="footer-top">
-                <div class="footer-brand">
-                <h4>VAULT<span>_</span>ARCHIVE</h4>
-                <p>Sistema de armazenamento seguro. Todos os dados criptografados.</p>
-                </div>
-
-                <div class="footer-col">
-                <h5>NAVEGAÇÃO</h5>
-                <a href="#">Início</a>
-                <a href="#">Catálogo</a>
-                <a href="#">Sobre</a>
-                </div>
-
-                <div class="footer-col">
-                <h5>SISTEMA</h5>
-                <a href="#">Status: <span class="status-dot"></span> Online</a>
-                <a href="#">256-bit Encryption</a>
-                <a href="#">API Docs</a>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 VAULT ARCHIVE — TODOS OS DIREITOS RESERVADOS</p>
-                <p class="footer-code">// build_0x7F3A</p>
-            </div>
-            </footer>
+                <Footer/>
+        
         </>
     )
 }
