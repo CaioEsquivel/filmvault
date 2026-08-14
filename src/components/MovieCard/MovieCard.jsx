@@ -1,28 +1,33 @@
 import './MovieCard.css'
 import placehold from '../../assets/placeholder.jpg'
 import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { KeyContext } from '../../context/KeyContext'
+import { GenreContext } from '../../context/GenreContext'
 
 export const MovieCard = ({data})=>{
 
-    const [api_key] = useState('9c680d9feb4e5432fd539ae8ae31a071')
+    // const [api_key] = useState('9c680d9feb4e5432fd539ae8ae31a071')
+    const {api_key} = useContext(KeyContext)
+    const {Genre} = useContext(GenreContext)
     
-    const [Genre, setGenre] = useState(null)
+    // const [Genre, setGenre] = useState(null)
 
-    const fetchArchiveGenre = async ()=>{
-        const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=pt-BR`)
-        const data = await response.json()
+    // const fetchArchiveGenre = async ()=>{
+    //     const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}&language=pt-BR`)
+    //     const data = await response.json()
         
-        setGenre(data.genres)
+    //     setGenre(data.genres)
             
         
-    }
+    // }
 
-      useEffect(()=>{
+    //   useEffect(()=>{
 
 
-        fetchArchiveGenre() 
+    //     fetchArchiveGenre() 
 
-        },[])
+    //     },[])
 
     return(
         <>

@@ -1,0 +1,194 @@
+.category-page{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 200px;
+    column-gap: 20px;
+}
+.category-page-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 100%;
+    gap: 10px;
+    align-items: start;
+    justify-content: center;
+}
+.top-category-text{
+    color: var(--primary);
+    font-family: var(--text-body);
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.category-movie-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.category-filter-container{
+    width: 200px;
+    height: 100%;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.category-filter-container>h2{
+    color: var(--primary);
+    font-family: var(--text-body);
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+.filter-genre-list>h3{
+    font-family:var(--text-title);
+    color:var(--text);
+    font-size:13px;
+    letter-spacing:1.5px;
+    margin-bottom:15px;
+    align-self: center;
+}
+.filter-genre-list{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+    margin-top: 20px;
+}
+.genre-button{
+    display: flex;
+    align-content: center;
+    justify-content: end;
+    gap: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+.genre-button > p{
+    font-family:var(--text-title);
+    color:var(--text);
+    font-size:13px;
+    letter-spacing:1.5px;
+}
+.genre-button-individual{
+    width: 20px;
+    background-color: transparent;
+    height: 20px;
+    border: 1px solid var(--primary-dead);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+.rating-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 99px;
+  background: #e5e5e5; /* cor da trilha */
+  outline: none;
+}
+
+/* bolinha - Chrome/Safari */
+.rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+/* trilha - Firefox */
+.rating-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--text-secondary);
+}
+
+/* bolinha - Firefox */
+.rating-slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--primary-dark);
+  border: 2px solid white;
+  cursor: pointer;
+}
+.genre-label{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+.genre-label>label{
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--text-body);
+}
+.rating-value {
+    font-size: 18px;
+    font-weight: 400;
+    font-family: var(--text-body);
+    color: var(--primary);
+}
+.filter-rating-list>h3{
+    font-family:var(--text-title);
+    color:var(--text);
+    font-size:13px;
+    letter-spacing:1.5px;
+    margin-bottom:15px;
+    align-self: center;
+}
+.filter-rating-list{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+    margin-top: 20px;
+}
+.genre-btn-active{
+    background-color: var(--primary-transparent) !important;
+}
+.genre-btn-active > span{
+    display: block !important;
+}
+.genre-button > button > span{
+    color: var(--text);
+    display: none;
+}
+.filter-submit{
+    border: 1px solid var(--primary);
+    background-color: var(--primary-transparent);
+    font-family: var(--text-body);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--text);
+    padding: 5px 10px;
+    width: 100%;
+    cursor: pointer;
+    
+    transition: all .3s ease;
+    border-radius: 5px;
+}
+.filter-submit:hover{
+    background-color: var(--bg);
+}
+.filter-reset{
+    border: 1px solid var(--text);
+    background-color: var(--transparent);
+    font-family: var(--text-body);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--text);
+    padding: 5px 10px;
+    width: 100%;
+    cursor: pointer;
+    
+    transition: all .3s ease;
+    border-radius: 5px;
+}
+.filter-reset:hover{
+    background-color: var(--bg);
+}

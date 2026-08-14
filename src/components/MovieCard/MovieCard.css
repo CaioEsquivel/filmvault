@@ -10,6 +10,14 @@
     cursor: pointer;
     transition: all .2s ease;
     min-height: 480px;
+    transition: all .3s ease;
+}
+.archive-case:hover{
+    background-color: var(--primary-transparent);
+}
+.archive-case:hover .case-lock>i{
+    background-color: var(--bg);
+    color: var(--text);
 }
 .archive-case:hover{
     border-color: var(--primary);
@@ -84,6 +92,7 @@
     border-radius: 10px;
     cursor: pointer;
     font-size: 28px;
+    transition: all .3s ease;
 }
 .case-lock{
     margin-right: 10px;

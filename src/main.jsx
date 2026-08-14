@@ -8,6 +8,12 @@ import { Login } from './pages/login/login.jsx'
 import { Master } from './pages/main/Master.jsx'
 import { Dashboard } from './pages/dashboard/dashboard.jsx'
 import { Archive } from './pages/archive/archive.jsx'
+import { CategoriesPage } from './pages/categories/categories.jsx'
+
+
+import { GenreProvider } from './context/GenreContext.jsx'
+import { KeyProvider } from './context/KeyContext.jsx'
+
 
 
 
@@ -31,6 +37,10 @@ const route = createBrowserRouter([
       {
         path:'archive',
         element: <Archive />
+      },
+      {
+        path:'category',
+        element: <CategoriesPage />
       }
     ]
   }
@@ -38,6 +48,10 @@ const route = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={route} />
+    <KeyProvider>
+      <GenreProvider>
+        <RouterProvider router={route} />
+      </GenreProvider>
+    </KeyProvider>
   </StrictMode>,
 )
