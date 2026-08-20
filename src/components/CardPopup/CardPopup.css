@@ -74,7 +74,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
 }
 .btn-popup > a {
@@ -109,4 +109,21 @@
 .popup-card>button:hover{
     color: var(--primary);
 
+}
+.btn-popup>button{
+    background-color: transparent;
+    border: 1px solid var(--transparent);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 24px;
+    color: var(--text);
+
+}
+.btn-popup>button:hover{
+    border-color: var(--primary-transparent);
+    color: var(--primary);
+}
+.homepage-delete{
+    display: none;
 }

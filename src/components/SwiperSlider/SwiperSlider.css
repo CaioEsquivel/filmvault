@@ -34,10 +34,11 @@
 .swiper-slide-content > img{
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    object-fit: cover;
     filter: brightness(0.6);
     z-index: 0;
+    height: 100%;
 }
 .swiper-bg-gradient{
     position: absolute;
@@ -145,4 +146,20 @@
 }
 .swiper-scrollbar{
     background-color: #ffffff1f !important;
+}
+
+@media (max-width:940px) {
+    .swiper-slide-content > p{
+        display: none;
+    }
+}
+@media (max-width:1100px) {
+    .swiper-slide-content > img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        filter: brightness(0.6);
+        z-index: 0;
+    }
 }

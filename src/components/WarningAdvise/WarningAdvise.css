@@ -1,0 +1,20 @@
+.warning-advise{
+    color: var(--text);
+    background-color: var(--transparent);
+    backdrop-filter: blur(2px);
+    font-family: var(--text-body);
+    font-size: 22px;
+    position: fixed;
+    top: 20%;
+    right: 10px;
+    transform: translateX(150%);
+    z-index: 5;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all .3s ease;
+    pointer-events: none;
+}
+.warning-advise.warning-show{
+    transform: translateX(0);
+
+}

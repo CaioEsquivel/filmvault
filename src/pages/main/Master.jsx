@@ -3,6 +3,7 @@ import logo from '../../assets/logo.png'
 
 import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
@@ -13,7 +14,8 @@ import { BackgroundBlur } from '../../components/BackgroundBlur/BackgroundBlur'
 import { useContext } from 'react'
 import { InputContext } from '../../context/InputContext'
 import {FilterMovieArrContext} from '../../context/FilterMovieArrContext'
-import { useState } from 'react'
+import { WarningAdvise } from '../../components/WarningAdvise/WarningAdvise'
+import { LoginBoolContext } from '../../context/LoginBoolContext'
 
 
 export const Master = ()=>{
@@ -21,9 +23,25 @@ export const Master = ()=>{
     const {inputValue, setInputValue} = useContext(InputContext)
     const {filterMovieArr,setFilterMovieArr} = useContext(FilterMovieArrContext)
     const [genreNames,setGenreNames] = useState([])
+    const [menuBool, setMenuBool] = useState(false)
+    const {loginBool,setLoginBool} = useContext(LoginBoolContext)
 
 
     const [pageNumber, setPageNumber] = useState(1)
+    const [userStorage, setUserStorage] = useState(null)
+
+    useEffect(()=>{
+        if(!localStorage.getItem('users')){
+            setLoginBool(false)
+        }else{
+            setLoginBool(true)
+        }
+
+        setUserStorage(JSON.parse(localStorage.getItem('currentUser')))
+    },[])
+
+
+    
     
 
     const handleInputClick = async ()=>{
@@ -52,10 +70,10 @@ export const Master = ()=>{
                         TERMINAL
                     </div>
                     <div className="terminal-content">
-                        <p>user: neowather</p>
-                        <p>status: online</p>
-                        <p>clearance: level <span>1</span></p>
-                        <p>vault access: <span className='terminal-status'> Granted</span></p>
+                        <p>user: {`${loginBool?userStorage?.name:'UNKNOWN'}`}</p>
+                        <p>status: {loginBool?'connected':'disconnected'}</p>
+                        <p>clearance: level <span className={`${loginBool?'':'red-clearance'}`}>1</span></p>
+                        <p>vault access: <span className={`terminal-status ${loginBool?'':'terminal-error'}`}> {loginBool?'Granted':'Not granted'}</span></p>
                     </div>
                 </div>
 
@@ -64,9 +82,11 @@ export const Master = ()=>{
                     <NavLink to='archive' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-inbox-archive-line"></i> Vault Archive</NavLink>
                     <NavLink to='category' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-list-check"></i> categories</NavLink>
                     <NavLink to='wishlist' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-bookmark-fill"></i> Watchlists</NavLink>
-                    <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-star-fill"></i> Favorites</NavLink>
-                    <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-settings-3-fill"></i> Settings</NavLink>
-                    <NavLink to='/' className='aside-logout'><i className="ri-logout-box-r-fill"></i> Logout</NavLink>
+                    <NavLink to='login' onClick={()=>{
+                        setLoginBool(false)
+                        localStorage.removeItem('currentUser')
+                        localStorage.removeItem('currentUserKey')
+                    }} className='aside-logout'><i className="ri-logout-box-r-fill"></i> Logout</NavLink>
                 </nav>
 
                 <div className="aside-status">
@@ -76,11 +96,11 @@ export const Master = ()=>{
                     </div>
                     <div className="terminal-content-padlock">
 
-                        <div className="terminal-padlock">
+                        <div className={`terminal-padlock ${loginBool?'':'padlock-error'}`}>
                             <i className="ri-lock-2-fill"></i>
                         </div>
                         <div className="padlock-content">
-                            <h3>SECURE</h3>
+                            <h3 className={`${loginBool?'':'padlock-h3-error'}`}>{loginBool?'SECURE':'NOT SECURE'}</h3>
                             <span>
                                 <p>256-bit</p>
                                 <p>encryption</p>
@@ -91,7 +111,7 @@ export const Master = ()=>{
 
                     <div className="terminal-bar">
                         <div className="bar-loading"></div>
-                        100%
+                        {loginBool?'100%':'0%'}
                     </div>
                 </div>
                 
@@ -105,7 +125,15 @@ export const Master = ()=>{
                             setPageNumber(1)
                         }} ><i className="ri-search-line"></i></Link>
                     </div>
-                    <button className="header-profile"><i className="ri-user-fill"></i></button>
+
+                    <div className="profile-div">
+                        <button onClick={()=>setMenuBool(!menuBool)} className="header-profile"><i className="ri-user-fill"></i></button>
+
+                        <div className={`profile-information ${menuBool?'profile-show':''} ${loginBool?'':'profile-div-error'}`}>
+                            <button onClick={()=>setMenuBool(false)} ><i className="ri-close-line"></i></button>
+                            <p>{`${loginBool?`nome: ${userStorage?.name} email: ${userStorage?.email}`:'NÃO LOGADO'}`}</p>
+                        </div>
+                    </div>
                 </header>
                 <section>
 
@@ -124,6 +152,11 @@ export const Master = ()=>{
         <Footer/>
         <CardPopup/>
         <BackgroundBlur/>
+        <WarningAdvise content='Adicionado à wishlist' />
+
+        
+
+        
         
         
         </>

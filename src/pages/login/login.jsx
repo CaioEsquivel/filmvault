@@ -9,13 +9,12 @@ export const Login = ()=>{
     
     const navigate = useNavigate()
 
-    // useEffect(()=>{
-    //     if(localStorage.getItem('currentUserKey')){
-
-    //         navigate('/')
-    //     }
+    useEffect(()=>{
+        if(localStorage.getItem('currentUserKey')){
+            navigate('/')
+        }
         
-    // },[])
+    },[])
 
     const [showPassword, setShowPassword] = useState(false)
     const [loginError, setLoginError] = useState(false)
@@ -89,7 +88,7 @@ export const Login = ()=>{
 
 
 
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">entrar</button>
                         
                 </form>
                 <span className="login-link">Não possui uma conta? <Link to="/register">Cadastrar</Link></span>

@@ -65,6 +65,10 @@
     box-shadow:0 0 6px var(--primary);
     margin-right:4px;
 }
+.status-dot.status-denied{
+    background:var(--danger) !important;
+    box-shadow:0 0 6px var(--danger) !important;
+}
 
 .footer-bottom{
     border-top:1px solid var(--border);

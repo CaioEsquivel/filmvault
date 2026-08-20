@@ -17,3 +17,12 @@
 .delete-washlist.delete-show{
     display: block;
 }
+.wish-message{
+    color: var(--text);
+    font-family: var(--text-body);
+    font-size: 30px;
+    display: none;
+}
+.wish-message.wish-message-show{
+    display: block;
+}

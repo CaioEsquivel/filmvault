@@ -10,7 +10,10 @@ import { MatrixRain } from '../../components/MatrixRain/MatrixRain'
 export const Register = ()=>{
 
     useEffect(()=>{
-        localStorage.removeItem('currentUserKey')
+        if(localStorage.getItem('currentUserKey')){
+            navigate('/')
+        }
+        
     },[])
 
     const [showPassword, setShowPassword] = useState(false)

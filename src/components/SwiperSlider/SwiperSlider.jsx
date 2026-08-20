@@ -82,7 +82,7 @@ export const SwiperSlider = () => {
                     <div className="swiper-details">
                         <p>{new Date(el.release_date).getFullYear()}</p>
                         <div className="swiper-details-dot"></div>
-                        <p>{`${Math.floor(el.runtime / 60)}h ${el.runtime - (Math.floor(el.runtime / 60) * 60)}m`}</p>
+                        <p>{`${Math.floor(el.runtime / 60)}h ${el.runtime - (Math.floor(el.runtime / 60) * 60)}m`}</p> 
                     </div>
                     <p>{el.overview}</p>
                     <div className="swiper-btn">

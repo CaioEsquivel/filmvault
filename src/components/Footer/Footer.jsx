@@ -1,7 +1,12 @@
 import './Footer.css'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { LoginBoolContext } from '../../context/LoginBoolContext'
 
 export const Footer = ()=>{
+
+    const {loginBool,setLoginBool} = useContext(LoginBoolContext)
+
     return(
         <footer class="site-footer">
             <div class="footer-top">
@@ -19,7 +24,7 @@ export const Footer = ()=>{
 
                 <div class="footer-col">
                 <h5>SISTEMA</h5>
-                <a href="#">Status: <span class="status-dot"></span> Online</a>
+                <a href="#">Status: <span class={`status-dot ${loginBool?'':'status-denied'}`}></span> {loginBool?'Online':'Offline'}</a>
                 <a href="#">256-bit Encryption</a>
                 <a href="#">API Docs</a>
                 </div>

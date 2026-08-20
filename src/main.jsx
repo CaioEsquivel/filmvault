@@ -19,6 +19,9 @@ import { CardToggleProvider } from './context/CardToggleContext.jsx'
 import { InputProvider } from './context/InputContext.jsx'
 import { FilterMovieArrProvider } from './context/FilterMovieArrContext.jsx'
 import { WishlistProvider } from './context/WishlistContext.jsx'
+import { WarningProvider } from './context/WarningContext.jsx'
+import { LoginBoolProvider } from './context/LoginBoolContext.jsx'
+import { FilterMenuProvider } from './context/FilterMenuContext.jsx'
 
 
 
@@ -65,7 +68,13 @@ createRoot(document.getElementById('root')).render(
               <InputProvider>
                 <FilterMovieArrProvider>
                   <WishlistProvider>
-                    <RouterProvider router={route} />
+                    <WarningProvider>
+                      <LoginBoolProvider>
+                        <FilterMenuProvider>
+                          <RouterProvider router={route} />
+                        </FilterMenuProvider>
+                      </LoginBoolProvider>
+                    </WarningProvider>
                   </WishlistProvider>
                 </FilterMovieArrProvider>
               </InputProvider>

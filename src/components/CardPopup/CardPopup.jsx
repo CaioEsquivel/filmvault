@@ -7,6 +7,7 @@ import { KeyContext } from '../../context/KeyContext'
 import { CardPopupContext } from '../../context/CardPopupContext'
 import { CardToggleContext } from '../../context/CardToggleContext'
 import { WishlistContext } from '../../context/WishlistContext'
+import { WarningContext } from '../../context/WarningContext'
 
 
 export const CardPopup=()=>{
@@ -17,6 +18,8 @@ export const CardPopup=()=>{
     const {cardPopupData, setCardPopupData} = useContext(CardPopupContext)
     const {api_key} = useContext(KeyContext)
     const {CardToggle, setCardToggle} = useContext(CardToggleContext)
+    const {warningBool,setWarningBool} = useContext(WarningContext)
+    
 
 
     const [deleteWish, setDeleteWish] = useState(false)
@@ -63,9 +66,9 @@ export const CardPopup=()=>{
         <div className="description-popup">
             <p>{cardPopupData?.overview || 'Sem descrição'}</p>
             <div className="btn-popup">
-                <a href={cardPopupData?.homepage || '#'} target='blank' >Assistir</a>
-                <button onClick={washlistFunction}>wishlist</button>
-                <button className={`delete-washlist ${deleteWish?'delete-show':''}`} onClick={washlistDeleteFunction}>Delete wishlist</button>
+                <a href={cardPopupData?.homepage || '#'} className={`${cardPopupData?.homepage === ''? 'homepage-delete':''}`} target='blank' >Assistir</a>
+                <button onClick={()=>{washlistFunction(); setWarningBool(true)}}><i className="ri-bookmark-line"></i></button>
+                <button className={`delete-washlist ${deleteWish?'delete-show':''}`} onClick={washlistDeleteFunction}><i className="ri-bookmark-2-line"></i></button>
             </div>
             
         </div>

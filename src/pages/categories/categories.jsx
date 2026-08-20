@@ -8,7 +8,7 @@ import { GenreContext } from '../../context/GenreContext'
 import {FilterMovieArrContext} from '../../context/FilterMovieArrContext'
 import {InputContext} from '../../context/InputContext'
 import { useOutletContext } from 'react-router-dom'
-
+import { FilterMenuContext } from '../../context/FilterMenuContext'
 
 export const CategoriesPage = ()=>{
 
@@ -22,6 +22,8 @@ export const CategoriesPage = ()=>{
 
     const [rating, setRating] = useState(1);
     const [movieArr,setMovieArr] = useState(null)
+    const {filterMenuBool, setFilterMenuBool} = useContext(FilterMenuContext)
+
     // const [genreNames,setGenreNames] = useState([])
 
 
@@ -82,6 +84,7 @@ export const CategoriesPage = ()=>{
         <div className="category-movie-container">
             <div className="top-category-text">
                 Discover
+                <button onClick={()=>setFilterMenuBool(!filterMenuBool)}><i class="ri-filter-line"></i></button>
             </div>
             <div className="category-page-container">
                 {filterMovieArr?.results?.map(el=>{
@@ -97,7 +100,8 @@ export const CategoriesPage = ()=>{
             <PaginateButton data={filterMovieArr} page={pageNumber} setPage={setPageNumber} />
 
         </div>
-        <div className="category-filter-container">
+        <div className={`category-filter-container ${filterMenuBool?'category-menu-open':''}`}>
+            <button onClick={()=>setFilterMenuBool(false)} className='category-close-btn'><i className="ri-close-line"></i></button>
             {/* <h2>Filter</h2> */}
             <div className="filter-genre-list">
                 <h3>Categorias</h3>
@@ -115,6 +119,7 @@ export const CategoriesPage = ()=>{
                     )
                 })}
             </div>
+            <span><i className="ri-arrow-down-line"></i></span>
             <div className="filter-rating-list">
                 <h3>Avaliação</h3>
                 <div className='genre-label'>
@@ -133,12 +138,15 @@ export const CategoriesPage = ()=>{
                 />
             </div>
 
-            <button className='filter-submit' onClick={resetMovies}>Pesquisar <i class="ri-search-line"></i></button>
+            <button className='filter-submit' onClick={()=>{
+                resetMovies(); setFilterMenuBool(false)
+            }}>Pesquisar <i class="ri-search-line"></i></button>
             <button className='filter-reset' onClick={()=>{
                 handleMovieDiscover()
                 setGenreNames([])
                 setRating(1)
                 setPageNumber(1)
+                setFilterMenuBool(false)
             }} >Reset</button>
         </div>
 
