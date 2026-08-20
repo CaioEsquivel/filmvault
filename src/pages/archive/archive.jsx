@@ -40,7 +40,7 @@ export const Archive = ()=>{
         <div className="archive-page-container">
             {movieData?.results.map(el=>{
                 return(
-                    <MovieCard data={el}/>
+                    <MovieCard data={el} key={el.id}/>
                 )
             })}
         </div>

@@ -4,17 +4,36 @@ import logo from '../../assets/logo.png'
 import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Dashboard } from '../dashboard/dashboard'
 import { Footer } from '../../components/Footer/Footer'
+import {CardPopup} from '../../components/CardPopup/CardPopup'
+import { BackgroundBlur } from '../../components/BackgroundBlur/BackgroundBlur'
+import { useContext } from 'react'
+import { InputContext } from '../../context/InputContext'
+import {FilterMovieArrContext} from '../../context/FilterMovieArrContext'
+import { useState } from 'react'
 
 
 export const Master = ()=>{
+
+    const {inputValue, setInputValue} = useContext(InputContext)
+    const {filterMovieArr,setFilterMovieArr} = useContext(FilterMovieArrContext)
+    const [genreNames,setGenreNames] = useState([])
+
+
+    const [pageNumber, setPageNumber] = useState(1)
     
 
+    const handleInputClick = async ()=>{
+        setGenreNames([])
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=9c680d9feb4e5432fd539ae8ae31a071&query=${inputValue}`)
+        const data = await response.json()
+        setFilterMovieArr(data)
+    }
     
-
-
+    
     return(
         <>
         <main>
@@ -44,7 +63,7 @@ export const Master = ()=>{
                     <NavLink to='/' className={({isActive})=> isActive?'aside-link-active':''} ><i className="ri-home-4-fill"></i> dashboard</NavLink>
                     <NavLink to='archive' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-inbox-archive-line"></i> Vault Archive</NavLink>
                     <NavLink to='category' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-list-check"></i> categories</NavLink>
-                    <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-bookmark-fill"></i> Watchlists</NavLink>
+                    <NavLink to='wishlist' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-bookmark-fill"></i> Watchlists</NavLink>
                     <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-star-fill"></i> Favorites</NavLink>
                     <NavLink to='register' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-settings-3-fill"></i> Settings</NavLink>
                     <NavLink to='/' className='aside-logout'><i className="ri-logout-box-r-fill"></i> Logout</NavLink>
@@ -80,15 +99,18 @@ export const Master = ()=>{
             <div className='main-content'>
                 <header>
                     <div className="header-search-bar">
-                        <input type="text"  placeholder='Pesquisar arquivo...' />
-                        <button><i className="ri-search-line"></i></button>
+                        <input type="text" value={inputValue}  placeholder='Pesquisar arquivo...' onChange={(e) => setInputValue(e.target.value)} />
+                        <Link to='/category' onClick={()=>{
+                            if(inputValue) handleInputClick()
+                            setPageNumber(1)
+                        }} ><i className="ri-search-line"></i></Link>
                     </div>
                     <button className="header-profile"><i className="ri-user-fill"></i></button>
                 </header>
                 <section>
 
 
-                    <Outlet/>
+                    <Outlet context={{ pageNumber, setPageNumber, genreNames, setGenreNames }} />
 
 
                 </section>
@@ -99,7 +121,10 @@ export const Master = ()=>{
             
         </main>
 
-                <Footer/>
+        <Footer/>
+        <CardPopup/>
+        <BackgroundBlur/>
+        
         
         </>
     )

@@ -11,6 +11,7 @@
     gap: 10px;
     align-items: start;
     justify-content: center;
+    height: 100%;
 }
 .top-category-text{
     color: var(--primary);
@@ -22,6 +23,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 100%;
 }
 .category-filter-container{
     width: 200px;
@@ -191,4 +193,19 @@
 }
 .filter-reset:hover{
     background-color: var(--bg);
+}
+.not-found-movies{
+    flex: 1;
+    font-family: var(--text-body);
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--text);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+.not-found-movies.text-active{
+    display: flex;
 }

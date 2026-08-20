@@ -4,13 +4,17 @@ import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { KeyContext } from '../../context/KeyContext'
 import { GenreContext } from '../../context/GenreContext'
+import { CardPopupContext } from '../../context/CardPopupContext'
+import { CardToggleContext } from '../../context/CardToggleContext'
 
 export const MovieCard = ({data})=>{
 
     // const [api_key] = useState('9c680d9feb4e5432fd539ae8ae31a071')
     const {api_key} = useContext(KeyContext)
     const {Genre} = useContext(GenreContext)
-    
+    const {cardPopupData,setCardPopupData} = useContext(CardPopupContext)
+    const {CardToggle, setCardToggle} = useContext(CardToggleContext)
+
     // const [Genre, setGenre] = useState(null)
 
     // const fetchArchiveGenre = async ()=>{
@@ -18,20 +22,23 @@ export const MovieCard = ({data})=>{
     //     const data = await response.json()
         
     //     setGenre(data.genres)
-            
+    useEffect(()=>{
+        console.log(cardPopupData);
         
-    // }
-
-    //   useEffect(()=>{
-
-
-    //     fetchArchiveGenre() 
-
-    //     },[])
+    },[cardPopupData])
+            
+    const detailedMovieHandle = async(id)=>{
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}&language=pt-BR`)
+        const data = await response.json()
+        setCardPopupData(data)
+    }
 
     return(
         <>
-        <div className="archive-case" key={crypto.randomUUID()}>
+        <div className="archive-case"  onClick={()=>{
+            detailedMovieHandle(data.id)
+            setCardToggle(true)
+            }} >
             <div className="top-text">
                 CASE
                 <span> #{data.id}</span>
@@ -44,16 +51,16 @@ export const MovieCard = ({data})=>{
                         <div className="case-details-extra">
                         <p>{data?.release_date? new Date(data?.release_date).getFullYear() : 'nulo'}</p>
                         <div className="archive-details-dot"></div>
-                        <p><i class="ri-star-fill"></i> {(data.vote_average).toFixed(1)}</p>
+                        <p><i className="ri-star-fill"></i> {(data?.vote_average).toFixed(1)}</p>
                     </div>
                     <div className="detail-bottom">
-                    {data.genre_ids.slice(0,2).map(genreId=>{
-                        const genre = Genre?.find(genreArr=>{
-                            return genreId === genreArr.id
-                        })
+                    {(data?.genre_ids ?? data?.genres)?.slice(0,2).map(genreItem=>{
+                        const genreId = typeof genreItem === 'object' ? genreItem.id : genreItem
+                         const genre = Genre?.find(genreArr => genreId === genreArr.id)
 
-                        return <p key={genre?.id}>{genre?.name}</p>
+                        return <p key={genre?.id ?? genreId}>{genre?.name}</p>
                     })}
+                    
                     </div>
 
                     </div>

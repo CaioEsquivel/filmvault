@@ -1,0 +1,112 @@
+.popup-card{
+    color: white;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%) scale(0.9);
+    left: 50%;
+    background-color: var(--card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 10px;
+    width: 600px;
+    border-radius: 10px;
+    gap: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .3s ease;
+    z-index: 2;
+    -webkit-box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.56); 
+    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.56);
+    border: 1px solid var(--bg);
+}
+.popup-card.popup-active{
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(-50%) translateX(-50%) scale(1);
+
+}
+.popup-card>h3{
+    align-self: start;
+    color: var(--text-secondary);
+    font-family: var(--text-title);
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+.top-popup>img{
+    width: 200px;
+    border-radius: 10px;
+    
+}
+.top-popup{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+}
+.top-popup-detail{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+    font-family: var(--text-body);
+}
+.top-popup-detail>h2{
+    color: var(--primary-dead);
+}
+.top-popup-detail> p:first-of-type{
+    color: yellow;
+}
+.description-popup {
+    color: var(--text);
+    font-family: var(--text-body);
+    font-weight: 400;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 0 20px;
+}
+.btn-popup{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+.btn-popup > a {
+    padding: 10px;
+    background-color: transparent;
+    font-weight: 400;
+    font-family: var(--text-body);
+    text-decoration: none;
+    color: var(--primary);
+    text-align: center;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid var(--primary);
+    transition: all .3s ease;
+}
+.btn-popup > a:hover {
+    background-color: var(--transparent);
+}
+.popup-card>button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: all .3s ease;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 32px;
+    padding: 5px;
+    
+    color: var(--text-secondary);
+}
+.popup-card>button:hover{
+    color: var(--primary);
+
+}

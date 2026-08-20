@@ -1,0 +1,17 @@
+.background-blur{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    transition: all .3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+.background-blur.blur-active{
+    transition: all .3s ease;
+    pointer-events: all;
+    opacity: 1;
+}

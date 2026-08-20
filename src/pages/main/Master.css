@@ -216,7 +216,7 @@ header{
     max-width: 400px ;
     width: 100%;
 }
-.header-search-bar > button{
+.header-search-bar > a{
     position: absolute;
     top: 50%;
     right: 0;
@@ -230,8 +230,15 @@ header{
     color: var(--primary-dead);
     font-size: 20px;
     transition: all .3s ease;
+    text-decoration: none;
 }
-.header-search-bar > button:hover{
+.header-search-bar > a>i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.header-search-bar > a:hover{
     color: var(--primary);
 }
 .header-search-bar > input{

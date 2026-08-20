@@ -1,0 +1,19 @@
+
+
+
+
+.wishlist-content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+    width: 100%;
+    gap: 10px;
+    align-items: start;
+    justify-content: center;
+    height: 100%;
+}
+.delete-washlist{
+    display: none;
+}
+.delete-washlist.delete-show{
+    display: block;
+}

@@ -9,10 +9,16 @@ import { Master } from './pages/main/Master.jsx'
 import { Dashboard } from './pages/dashboard/dashboard.jsx'
 import { Archive } from './pages/archive/archive.jsx'
 import { CategoriesPage } from './pages/categories/categories.jsx'
+import { Wishlist } from './pages/wishlist/wishlist.jsx'
 
 
 import { GenreProvider } from './context/GenreContext.jsx'
 import { KeyProvider } from './context/KeyContext.jsx'
+import { CardPopupProvider } from './context/CardPopupContext.jsx'
+import { CardToggleProvider } from './context/CardToggleContext.jsx'
+import { InputProvider } from './context/InputContext.jsx'
+import { FilterMovieArrProvider } from './context/FilterMovieArrContext.jsx'
+import { WishlistProvider } from './context/WishlistContext.jsx'
 
 
 
@@ -41,6 +47,10 @@ const route = createBrowserRouter([
       {
         path:'category',
         element: <CategoriesPage />
+      },
+      {
+        path:'wishlist',
+        element: <Wishlist />
       }
     ]
   }
@@ -50,7 +60,17 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <KeyProvider>
       <GenreProvider>
-        <RouterProvider router={route} />
+        <CardPopupProvider>
+          <CardToggleProvider>
+              <InputProvider>
+                <FilterMovieArrProvider>
+                  <WishlistProvider>
+                    <RouterProvider router={route} />
+                  </WishlistProvider>
+                </FilterMovieArrProvider>
+              </InputProvider>
+          </CardToggleProvider>
+        </CardPopupProvider>
       </GenreProvider>
     </KeyProvider>
   </StrictMode>,
