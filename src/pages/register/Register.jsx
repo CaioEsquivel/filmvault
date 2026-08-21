@@ -17,6 +17,7 @@ export const Register = ()=>{
     },[])
 
     const [showPassword, setShowPassword] = useState(false)
+    const [registerError, setRegisterError] = useState(false)
 
     const { register, 
             handleSubmit, 
@@ -25,13 +26,23 @@ export const Register = ()=>{
 
     const navigate = useNavigate()
 
-    const onSubmit = (data)=>{
-        setShowPassword(false)
-        const users = JSON.parse(localStorage.getItem('users')) || []
-        users.push(data)
-        localStorage.setItem(`users`, JSON.stringify(users))   
-        navigate('/login')
+    const onSubmit = (data) => {
+    setShowPassword(false)
+
+    const users = JSON.parse(localStorage.getItem('users')) || []
+
+    if (users.some(el => el.email === data.email)) {
+        setRegisterError(true)
+        return
     }
+
+    setRegisterError(false)
+
+    users.push(data)
+    localStorage.setItem('users', JSON.stringify(users))
+
+    navigate('/login')
+}
 
 
     
@@ -61,6 +72,9 @@ export const Register = ()=>{
                     })} />
                     {errors?.email?.type === 'required' && <p className="error-message">O campo email é obrigatório</p>}
                     {errors?.email?.type === 'pattern' && <p className="error-message">Digite um email válido</p>}
+                    {registerError && (
+                        <p className="error-message">Este email já está cadastrado</p>
+                    )}
 
 
                     <div className="password-input-container">
