@@ -22,7 +22,14 @@
     font-family: var(--text-body);
     font-size: 30px;
     display: none;
+    text-align: center;
+
 }
 .wish-message.wish-message-show{
     display: block;
+}
+@media (max-width:1000px) {
+    .wish-message{
+        height: 100vh;
+    }
 }

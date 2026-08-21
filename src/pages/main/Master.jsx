@@ -16,6 +16,10 @@ import { InputContext } from '../../context/InputContext'
 import {FilterMovieArrContext} from '../../context/FilterMovieArrContext'
 import { WarningAdvise } from '../../components/WarningAdvise/WarningAdvise'
 import { LoginBoolContext } from '../../context/LoginBoolContext'
+import { AsidePopupContext } from '../../context/AsidePopupContext'
+import { FilterMenuContext } from '../../context/FilterMenuContext'
+import { SearchPopupContext } from '../../context/SearchPopupContext'
+import { CardToggleContext } from '../../context/CardToggleContext'
 
 
 export const Master = ()=>{
@@ -25,13 +29,32 @@ export const Master = ()=>{
     const [genreNames,setGenreNames] = useState([])
     const [menuBool, setMenuBool] = useState(false)
     const {loginBool,setLoginBool} = useContext(LoginBoolContext)
-
+    const {asidePopup, setAsidePopup} = useContext(AsidePopupContext)
+    const {filterMenuBool, setFilterMenuBool} = useContext(FilterMenuContext)
+    const {searchPopup, setSearchPopup} = useContext(SearchPopupContext)
+    const [rating, setRating] = useState(1);
+        const {CardToggle, setCardToggle} = useContext(CardToggleContext)
+    
+    
 
     const [pageNumber, setPageNumber] = useState(1)
     const [userStorage, setUserStorage] = useState(null)
+    useEffect(()=>{
+        if(asidePopup || filterMenuBool|| CardToggle){
+            document.body.style.overflow = 'hidden'
+        }else{
+            document.body.style.overflow = ''
+        }
+        
+        return()=>{
+            document.body.style.overflow = ''
+            
+        }
+    },[asidePopup,filterMenuBool, CardToggle])
+    
 
     useEffect(()=>{
-        if(!localStorage.getItem('users')){
+        if(!localStorage.getItem('currentUser')){
             setLoginBool(false)
         }else{
             setLoginBool(true)
@@ -55,7 +78,8 @@ export const Master = ()=>{
     return(
         <>
         <main>
-            <aside>
+            <aside className={`${asidePopup?'aside-open':''}`}>
+                <button onClick={()=>setAsidePopup(false)} className='aside-close'><i className="ri-close-line"></i></button>
                 <div className="aside-logo">
                     <img src={logo} alt="" />
                     <div>
@@ -78,15 +102,16 @@ export const Master = ()=>{
                 </div>
 
                 <nav className='aside-links'>
-                    <NavLink to='/' className={({isActive})=> isActive?'aside-link-active':''} ><i className="ri-home-4-fill"></i> dashboard</NavLink>
-                    <NavLink to='archive' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-inbox-archive-line"></i> Vault Archive</NavLink>
-                    <NavLink to='category' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-list-check"></i> categories</NavLink>
-                    <NavLink to='wishlist' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-bookmark-fill"></i> Watchlists</NavLink>
+                    <NavLink to='/' onClick={()=>setAsidePopup(false)} className={({isActive})=> isActive?'aside-link-active':''} ><i className="ri-home-4-fill"></i> dashboard</NavLink>
+                    <NavLink onClick={()=>setAsidePopup(false)} to='archive' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-inbox-archive-line"></i> Vault Archive</NavLink>
+                    <NavLink onClick={()=>setAsidePopup(false)} to='category' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-list-check"></i> categories</NavLink>
+                    <NavLink onClick={()=>setAsidePopup(false)} to='wishlist' className={({isActive})=> isActive?'aside-link-active':''}><i className="ri-bookmark-fill"></i> Watchlists</NavLink>
                     <NavLink to='login' onClick={()=>{
                         setLoginBool(false)
+                        setAsidePopup(false)
                         localStorage.removeItem('currentUser')
                         localStorage.removeItem('currentUserKey')
-                    }} className='aside-logout'><i className="ri-logout-box-r-fill"></i> Logout</NavLink>
+                    }} className='aside-logout'><i className="ri-logout-box-r-fill"></i> {loginBool?'Logout':'Logar'}</NavLink>
                 </nav>
 
                 <div className="aside-status">
@@ -118,27 +143,40 @@ export const Master = ()=>{
             </aside>
             <div className='main-content'>
                 <header>
-                    <div className="header-search-bar">
+                    <button onClick={()=>setAsidePopup(!asidePopup)} className='menu-toggle'><i className="ri-menu-line"></i></button>
+                    <div className={`header-search-bar ${searchPopup? 'search-open':''}`}>
                         <input type="text" value={inputValue}  placeholder='Pesquisar arquivo...' onChange={(e) => setInputValue(e.target.value)} />
                         <Link to='/category' onClick={()=>{
-                            if(inputValue) handleInputClick()
-                            setPageNumber(1)
+                            if(inputValue){
+                                handleInputClick()
+                                setPageNumber(1); 
+                                setSearchPopup(false)  
+                                setRating(1)
+                            } 
                         }} ><i className="ri-search-line"></i></Link>
                     </div>
 
-                    <div className="profile-div">
-                        <button onClick={()=>setMenuBool(!menuBool)} className="header-profile"><i className="ri-user-fill"></i></button>
 
-                        <div className={`profile-information ${menuBool?'profile-show':''} ${loginBool?'':'profile-div-error'}`}>
-                            <button onClick={()=>setMenuBool(false)} ><i className="ri-close-line"></i></button>
-                            <p>{`${loginBool?`nome: ${userStorage?.name} email: ${userStorage?.email}`:'NÃO LOGADO'}`}</p>
+                    <div className="header-btn">
+                    <button onClick={()=>setSearchPopup(!searchPopup)}><i className="ri-search-line"></i></button>
+
+
+
+                        <div className="profile-div">
+
+                            <button onClick={()=>setMenuBool(!menuBool)} className="header-profile"><i className="ri-user-fill"></i></button>
+
+                            <div className={`profile-information ${menuBool?'profile-show':''} ${loginBool?'':'profile-div-error'}`}>
+                                <button onClick={()=>setMenuBool(false)} ><i className="ri-close-line"></i></button>
+                                <p>{`${loginBool?`nome: ${userStorage?.name} email: ${userStorage?.email}`:'NÃO LOGADO'}`}</p>
+                            </div>
                         </div>
                     </div>
                 </header>
                 <section>
 
 
-                    <Outlet context={{ pageNumber, setPageNumber, genreNames, setGenreNames }} />
+                    <Outlet context={{ pageNumber, setPageNumber, genreNames, setGenreNames, rating, setRating }} />
 
 
                 </section>

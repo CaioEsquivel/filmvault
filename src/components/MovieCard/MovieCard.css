@@ -97,3 +97,11 @@
 .case-lock{
     margin-right: 10px;
 }
+@media (max-width:470px) {
+    .case-lock{
+        display: none;
+    }
+    .archive-case{
+        min-height: auto;
+    }
+}

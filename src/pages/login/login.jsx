@@ -1,4 +1,4 @@
-import './Login.css'
+import './login.css'
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
@@ -27,22 +27,36 @@ export const Login = ()=>{
 
     const onSubmit = (data)=>{
         
-        JSON.parse(localStorage.getItem('users')).find(el=>{
-            setShowPassword(false)
-            if(el.email === data.email && el.password === data.password){
-                setLoginError(true)
-                localStorage.setItem('currentUser', JSON.stringify(el))
-                const currentKey = `${Math.round(Math.random()* 100000)}-${Math.round(Math.random()* 100000)}-${Math.round(Math.random()* 100000)}`
-                localStorage.setItem('currentUserKey', currentKey)
-                navigate('/')
-            }
-            else{
-                console.log('erro');
-                setLoginError(true)
-            }
- 
+        const actualUser = JSON.parse(localStorage.getItem('users')).find(el=>{
+            return el.email === data.email && el.password === data.password
         })
 
+        if(actualUser){
+            setShowPassword(false)
+            localStorage.setItem('currentUser', JSON.stringify(actualUser))
+            const currentKey = `${Math.round(Math.random()* 100000)}-${Math.round(Math.random()* 100000)}-${Math.round(Math.random()* 100000)}`
+            localStorage.setItem('currentUserKey', currentKey)
+            navigate('/')    
+        }else{
+            console.log('erro');
+            setLoginError(true)
+        }
+        
+        // JSON.parse(localStorage.getItem('users')).find(el=>{
+        //     setShowPassword(false)
+        //     if(el.email === data.email && el.password === data.password){
+        //         setLoginError(true)
+        //         localStorage.setItem('currentUser', JSON.stringify(el))
+        //         const currentKey = `${Math.round(Math.random()* 100000)}-${Math.round(Math.random()* 100000)}-${Math.round(Math.random()* 100000)}`
+        //         localStorage.setItem('currentUserKey', currentKey)
+        //         navigate('/')
+        //     }
+        //     else{
+        //         console.log('erro');
+        //         setLoginError(true)
+        //     }
+ 
+        // })
 
 
         
@@ -74,7 +88,6 @@ export const Login = ()=>{
                     })} />
                     {errors?.email?.type === 'required' && <p className="error-message">O campo email é obrigatório</p>}
                     {errors?.email?.type === 'pattern' && <p className="error-message">Digite um email válido</p>}
-                    {loginError === true && <p className="error-message">Email ou senha inválidos</p>}
 
 
                     <div className="password-input-container">
