@@ -12,7 +12,7 @@ import { FilterMenuContext } from '../../context/FilterMenuContext'
 
 export const CategoriesPage = ()=>{
 
-    const { pageNumber, setPageNumber, genreNames, setGenreNames } = useOutletContext()
+    const { pageNumber, setPageNumber, genreNames, setGenreNames, rating, setRating } = useOutletContext()
 
 
     const {filterMovieArr,setFilterMovieArr} = useContext(FilterMovieArrContext)
@@ -20,7 +20,6 @@ export const CategoriesPage = ()=>{
     const {Genre} = useContext(GenreContext)
     const {inputValue, setInputValue} = useContext(InputContext)
 
-    const [rating, setRating] = useState(1);
     const [movieArr,setMovieArr] = useState(null)
     const {filterMenuBool, setFilterMenuBool} = useContext(FilterMenuContext)
 

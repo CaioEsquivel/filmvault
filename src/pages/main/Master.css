@@ -2,6 +2,7 @@ main{
     display: grid;
     grid-template-columns: 300px 1fr;
     align-items: start;
+    position: relative;
 }
 aside{
     height: 100%;
@@ -10,6 +11,7 @@ aside{
     flex-direction: column;
     padding: 10px 20px ;
     gap: 20px;
+    overflow-y: auto;
 }
 .aside-logo{
     display: flex;
@@ -72,7 +74,7 @@ aside{
     border: 1px solid var(--primary-dark);
     font-family: var(--text-body);
     box-shadow:0px 0px 10px var(--border);
-
+    flex-shrink: 0;
 }
 .aside-links > a{
     width: 100%;
@@ -357,4 +359,110 @@ section{
 }
 .profile-div-error{
     background-color: var(--danger-transparent) !important;
+}
+.menu-toggle{
+    display: none;
+}
+.aside-close{
+    display: none;
+}
+.header-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.header-btn > button{
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: var(--primary-dead);
+    font-size: 20px;
+    transition: all .3s ease;
+    text-decoration: none;
+    display: none;
+}
+.header-btn > button>i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.header-btn > button:hover{
+    color: var(--primary);
+}
+
+@media (max-width:1000px) {
+    .wish-message{
+        height: 100vh;
+    }
+    aside{
+        position: fixed;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        background-color:var(--black-transparent);
+        padding: 50px 20px 20px 20px ;
+        transform: translateX(-110%);
+        opacity: 0;
+        pointer-events: none;
+        transition: all .3s ease;
+    }
+    main{
+        grid-template-columns: 1fr;
+    }
+    .aside-open{
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: all;
+        
+    }
+    .menu-toggle{
+        display: block;
+        background-color: transparent;
+        border: none;
+        font-size: 28px;
+        color: var(--primary);
+        cursor: pointer;
+    }
+    .aside-close{
+        display: block;
+        background-color: transparent;
+        border: none;
+        font-size: 28px;
+        color: var(--danger);
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+    
+}
+@media (max-width: 450px) {
+    .header-search-bar{
+        position: absolute;
+        top: 80px;
+        z-index: 4;
+        background-color:var(--card);
+        opacity: 0;
+        
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-140px);
+        transition: all .3s ease;
+        pointer-events: none;
+    }
+    .header-search-bar.search-open{
+        opacity: 1;
+        pointer-events: all;
+        transform: translateX(-50%) translateY(0);
+
+    } 
+    .header-btn > button{
+    display: block;
+}
 }

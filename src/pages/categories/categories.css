@@ -12,6 +12,7 @@
     align-items: start;
     justify-content: center;
     height: 100%;
+    
 }
 .top-category-text{
     color: var(--primary);
@@ -226,6 +227,7 @@
     color: var(--text);
     border: none;
     cursor: pointer;
+    display: none;
 }
 
 @media (max-width:1017px) {
@@ -234,7 +236,7 @@
         right: 0;
         top: 0;
         background-color: var(--black-transparent);
-        padding: 20px 0 20px 20px;
+        padding: 20px ;
         width: 300px;
         transform: translateX(100%);
         opacity: 0;
@@ -252,6 +254,9 @@
         overflow-y: auto;
         
     }
+    .top-category-text > button{
+    display: block;
+}
     .genre-button{
         justify-content: space-between;
         padding: 0 30px;
@@ -282,5 +287,11 @@
     align-items: center;
     grid-template-columns: 1fr;
     column-gap: 20px;
+    }
+    
+}
+@media (max-width:470px) {
+    .category-page-container{
+        grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
     }
 }

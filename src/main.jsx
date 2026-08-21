@@ -22,6 +22,8 @@ import { WishlistProvider } from './context/WishlistContext.jsx'
 import { WarningProvider } from './context/WarningContext.jsx'
 import { LoginBoolProvider } from './context/LoginBoolContext.jsx'
 import { FilterMenuProvider } from './context/FilterMenuContext.jsx'
+import { AsidePopupProvider } from './context/AsidePopupContext.jsx'
+import { SearchPopupProvider } from './context/SearchPopupContext.jsx'
 
 
 
@@ -71,7 +73,11 @@ createRoot(document.getElementById('root')).render(
                     <WarningProvider>
                       <LoginBoolProvider>
                         <FilterMenuProvider>
-                          <RouterProvider router={route} />
+                          <AsidePopupProvider>
+                            <SearchPopupProvider>
+                              <RouterProvider router={route} />
+                            </SearchPopupProvider>
+                          </AsidePopupProvider>
                         </FilterMenuProvider>
                       </LoginBoolProvider>
                     </WarningProvider>

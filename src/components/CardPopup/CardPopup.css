@@ -127,3 +127,29 @@
 .homepage-delete{
     display: none;
 }
+@media (max-width:660px) {
+    .popup-card{
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        justify-content: space-between;
+        top: 0;
+        left: 0;
+        transform: translateX(0) translateY(0);
+        
+    }
+    .popup-card.popup-active{
+        transform: translateX(0) translateY(0);
+    }
+    .description-popup > p::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .description-popup > p::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+    }
+    .top-popup{
+        flex-direction: column;
+    }
+    
+}

@@ -2,7 +2,7 @@ import runner from '../../assets/runnerbanner.png'
 import tron from '../../assets/tronbanner.png'
 import matrix from '../../assets/matrixbanner.png'
 import { useEffect, useState } from 'react'
-import { Navigation, Pagination, Scrollbar, EffectFade, Parallax } from 'swiper/modules'
+import { Navigation, Pagination, Scrollbar, EffectFade, Parallax, Autoplay } from 'swiper/modules'
 import './SwiperSlider.css'
 
 
@@ -54,9 +54,13 @@ export const SwiperSlider = () => {
     return(
         <>
         <Swiper
-        modules={[ Pagination, Scrollbar, EffectFade, Parallax]}
+        modules={[ Pagination, Scrollbar, EffectFade, Parallax, Autoplay]}
         slidesPerView={1}
         loop={true}
+        autoplay={{
+        delay: 5000,
+        disableOnInteraction: false
+    }}
         parallax={true}
         effect='fade'
         scrollbar={{

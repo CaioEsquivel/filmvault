@@ -6,6 +6,7 @@ import { KeyContext } from '../../context/KeyContext'
 import { GenreContext } from '../../context/GenreContext'
 import { CardPopupContext } from '../../context/CardPopupContext'
 import { CardToggleContext } from '../../context/CardToggleContext'
+import { LoginBoolContext } from '../../context/LoginBoolContext'
 
 export const MovieCard = ({data})=>{
 
@@ -14,6 +15,8 @@ export const MovieCard = ({data})=>{
     const {Genre} = useContext(GenreContext)
     const {cardPopupData,setCardPopupData} = useContext(CardPopupContext)
     const {CardToggle, setCardToggle} = useContext(CardToggleContext)
+    const {loginBool,setLoginBool} = useContext(LoginBoolContext)
+
 
     // const [Genre, setGenre] = useState(null)
 
@@ -22,10 +25,6 @@ export const MovieCard = ({data})=>{
     //     const data = await response.json()
         
     //     setGenre(data.genres)
-    useEffect(()=>{
-        console.log(cardPopupData);
-        
-    },[cardPopupData])
             
     const detailedMovieHandle = async(id)=>{
         const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}&language=pt-BR`)
@@ -66,7 +65,7 @@ export const MovieCard = ({data})=>{
                     </div>
                 </div>
                 <div className="case-lock">
-                    <i class="ri-lock-fill"></i>
+                    {loginBool?<i class="ri-earth-line"></i>:<i class="ri-lock-fill"></i>}
                 </div>
             </div>
         </div>

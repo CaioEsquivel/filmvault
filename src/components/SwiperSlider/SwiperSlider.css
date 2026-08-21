@@ -163,3 +163,20 @@
         z-index: 0;
     }
 }
+@media (max-width:480PX) {
+    .swiper-slide-content > h2{
+        font-size: 32px;
+    }
+    .swiper-slide-content{
+        text-align: center;
+    }
+    .swiper-details{
+        justify-content: center;
+    }
+    .swiper-btn{
+        justify-content: center;
+    }
+    .swiper-bg-gradient{
+        display: none;
+    }
+}
